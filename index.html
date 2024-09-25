@@ -11,6 +11,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip({
+          placement : 'bottom'
+      });
+  });
+  </script>
+  <style>
+    /* Customizing the tooltip */
+    .tooltip-inner {
+        background-color: black; /*Change background color*/
+        color: white; /* Change text color */
+        border-radius: 10px; /* Rounded corners */
+        font-size: 12x; /* Increase font size */
+        padding: 10px; /* Add padding */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+    }
+
+    /* Tooltip arrow customization */
+    .tooltip.bs-tooltip-top .tooltip-arrow {
+        border-top-color: #4CAF50; /* Match arrow color to the tooltip */
+    }
+
+    /* Animation for tooltip */
+    .fade {
+        transition: opacity 0.5s ease-in-out; /* Smooth fade-in/out effect */
+    }
+</style>
   <link rel="icon" type="image/png" href="images/seal_icon.png">
 </head>
 
@@ -25,7 +60,7 @@
                 <name>Soham Gadgil</name>
               </p>
               <p>
-              Hi! I am a first CSE PhD 
+              Hi! I am a third year CSE PhD 
               student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank">AIMS Lab</a>, co-advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank">Dr. Su-In Lee</a> and <a href="https://homes.cs.washington.edu/~shapiro/" target="_blank">Dr. Linda Shapiro.</a> Prior to starting my Ph.D, I spent a year as a data engineer at Microsoft in the Windows Experience team.
               </p>
               <p class="content">
@@ -33,12 +68,12 @@
               </p>
               <p class="content">I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies (especially legal thrillers).
               <p style="text-align:center">
-                <a href="mailto:sgadgil@uw.edu">Email</a> &nbsp/&nbsp
-                <a href="data/Resume_Soham_Gadgil_PhD_12_15_23.pdf" target="_blank">CV</a> &nbsp/&nbsp
-                <a href="https://scholar.google.com/citations?user=Tg2VT2UAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://github.com/sgadgil6" target="_blank"> Github </a> &nbsp/&nbsp
-                <a href="https://twitter.com/soham_gadgil" target="_blank"> Twitter </a> &nbsp/&nbsp
-                <a href="https://www.linkedin.com/in/soham-gadgil-2729a9105/" target="_blank">LinkedIn</a>
+                <a href="mailto:sgadgil@uw.edu"><span class="bi bi-envelope-at" data-toggle="tooltip" data-original-title="Email" style="font-size: 2rem;"></span></a> &nbsp&nbsp
+                <a href="data/Resume_Soham_Gadgil_PhD_12_15_23.pdf" target="_blank"><span class="bi bi-file-pdf" data-toggle="tooltip" data-original-title="CV" style="font-size: 2rem;"></span></a></a> &nbsp&nbsp
+                <a href="https://scholar.google.com/citations?user=Tg2VT2UAAAAJ&hl=en&oi=ao" target="_blank"><i class="ai ai-google-scholar ai-2x" data-toggle="tooltip" data-original-title="Google Scholar" style="font-size: 2rem;"></i></a> &nbsp&nbsp
+                <a href="https://github.com/sgadgil6" target="_blank"><span class="bi bi-github" data-toggle="tooltip" data-original-title="GitHub" style="font-size: 2rem;"></span></a> &nbsp&nbsp
+                <a href="https://twitter.com/soham_gadgil" target="_blank"><span class="bi bi-twitter-x" data-toggle="tooltip" data-original-title="Twitter" style="font-size: 2rem;"></span></a> &nbsp&nbsp
+                <a href="https://www.linkedin.com/in/soham-gadgil-2729a9105/" target="_blank"><span class="bi bi-linkedin" data-toggle="tooltip" data-original-title="LinkedIn" style="font-size: 2rem;"></span></a>
               </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
@@ -102,11 +137,11 @@
             Roxana Daneshjou,
             Su-In Lee
             <br>
-              <em>CVPR 2024 Data Curation and Augmentation in Medical Imaging Workshop <strong>(Oral)</strong> </em> 
+              <em>CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank">DCAMI Workshop</a> <strong>(Oral, Best Paper Runner-Up Award)</strong> </em> 
               <!-- <font color="red">(Poster)</font> -->
               <br>
               <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v1.full.pdf" target="_blank"> [Paper]</a>
-              <p align="justify"> Recent advances in Artificial Intelligence (AI) have
+              <!-- <p align="justify"> Recent advances in Artificial Intelligence (AI) have
                 started disrupting the healthcare industry, especially medical imaging, and AI devices are increasingly being deployed
                 into clinical practice. Such classifiers have previously
                 demonstrated the ability to discern a range of protected demographic attributes (like race, age, sex) from medical images with unexpectedly high performance, a sensitive task
@@ -121,7 +156,7 @@
                 performance. Using this technique and the signals identified, we are able to explain ~44% of the total performance.
                 This analysis not only underscores the importance of cautious AI application in healthcare but also opens avenues
                 for improving the transparency and reliability of AI-driven
-                diagnostic tools.</p> 
+                diagnostic tools.</p>  -->
             </td>
           </tr>
           <tr>
@@ -139,7 +174,7 @@
               <br>
               <a href="https://arxiv.org/pdf/2306.03301.pdf" target="_blank"> [Paper]</a>
               <a href="https://github.com/suinleelab/DIME" target="_blank"> [Code]</a>
-              <p align="justify"> Dynamic feature selection, where we sequentially query features to make accurate
+              <!-- <p align="justify"> Dynamic feature selection, where we sequentially query features to make accurate
                 predictions with a minimal budget, is a promising paradigm to reduce feature
                 acquisition costs and provide transparency into the prediction process. The problem is challenging, however, as it requires both making predictions with arbitrary
                 feature sets and learning a policy to identify the most valuable selections. Here,
@@ -150,7 +185,7 @@
                 fashion. Building on our learning approach, we introduce several further improvements: allowing variable feature budgets across samples, enabling non-uniform
                 costs between features, incorporating prior information, and exploring modern
                 architectures to handle partial input information. We find that our method provides
-                consistent gains over recent state-of-the-art methods across a variety of datasets.</p> 
+                consistent gains over recent state-of-the-art methods across a variety of datasets.</p>  -->
             </td>
           </tr>
 
@@ -173,7 +208,7 @@
               <a href="https://www.medrxiv.org/content/medrxiv/early/2023/06/12/2023.06.07.23291119.full.pdf" target="_blank"> [Paper]</a>
               <a href="https://github.com/suinleelab/MONET" target="_blank"> [Code]</a>
 
-              <p align="justify"> Building trustworthy and transparent image-based medical AI systems requires the ability to interrogate data and
+              <!-- <p align="justify"> Building trustworthy and transparent image-based medical AI systems requires the ability to interrogate data and
                 models at all stages of the development pipeline: from training models to post-deployment monitoring. Ideally,
                 the data and associated AI systems could be described using terms already familiar to physicians, but this requires
                 medical datasets densely annotated with semantically meaningful concepts. Here, we present a foundation model
@@ -184,7 +219,7 @@
                 language descriptions from a large collection of medical literature. MONET can accurately annotate concepts across
                 dermatology images as verified by board-certified dermatologists, outperforming supervised models built on previously
                 concept-annotated dermatology datasets. We demonstrate how MONET enables AI transparency across the entire AI
-                development pipeline from dataset auditing to model auditing to building inherently interpretable models.</p> 
+                development pipeline from dataset auditing to model auditing to building inherently interpretable models.</p>  -->
 
             </td>
           </tr>
@@ -207,13 +242,13 @@
               <a href="https://proceedings.mlr.press/v143/gadgil21a/gadgil21a.pdf" target="_blank">[Paper]</a>
               <a href="https://github.com/stanfordmlgroup/CheXseg" target="_blank">[Code]</a>
 
-              <p align="justify"> Medical image segmentation models are typically supervised by expert annotations at the
+              <!-- <p align="justify"> Medical image segmentation models are typically supervised by expert annotations at the
                 pixel-level, which can be expensive to acquire. In this work, we propose a method that
                 combines the high quality of pixel-level expert annotations with the scale of coarse DNNgenerated saliency maps for training multi-label semantic segmentation models. We demonstrate the application of our semi-supervised method, which we call CheXseg, on multilabel chest X-ray interpretation. We find that CheXseg improves upon the performance
                 (mIoU) of fully-supervised methods that use only pixel-level expert annotations by 9.7%
                 and weakly-supervised methods that use only DNN-generated saliency maps by 73.1%. Our
                 best method is able to match radiologist agreement on three out of ten pathologies and
-                reduces the overall performance gap by 57.2% as compared to weakly-supervised methods.</p> 
+                reduces the overall performance gap by 57.2% as compared to weakly-supervised methods.</p>  -->
 
             </td>
           </tr>
@@ -237,7 +272,7 @@
               <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700758/pdf/nihms-1645484.pdf" target="_blank">[Paper]</a>
               <a href="https://github.com/sgadgil6/cnslab_fmri" target="_blank">[Code]</a>
 
-              <p align="justify"> The Blood-Oxygen-Level-Dependent (BOLD) signal of resting-state fMRI (rs-fMRI) records the
+              <!-- <p align="justify"> The Blood-Oxygen-Level-Dependent (BOLD) signal of resting-state fMRI (rs-fMRI) records the
                 temporal dynamics of intrinsic functional networks in the brain. However, existing deep learning
                 methods applied to rs-fMRI either neglect the functional dependency between different brain
                 regions in a network or discard the information in the temporal dynamics of brain activity. To
@@ -251,7 +286,7 @@
                 significantly more accurate than common approaches in predicting gender and age based on
                 BOLD signals. Furthermore, the brain regions and functional connections significantly
                 contributing to the predictions of our model are important markers according to the neuroscience
-                literature.</p> 
+                literature.</p>  -->
 
             </td>
           </tr>
@@ -272,7 +307,7 @@
               <br>
               <a href="https://ieeexplore.ieee.org/abstract/document/9368267" target="_blank">[Paper]</a>
               <a href="https://github.com/sgadgil6/lunar_lander_project" target="_blank">[Code]</a>
-              <p align="justify"> Reinforcement Learning (RL) is an area of machine learning concerned with enabling an agent to navigate an environment with uncertainty in order to maximize some notion of cumulative long-term reward. In this paper, we implement and analyze two different RL techniques, Sarsa and Deep QLearning, on OpenAI Gym's LunarLander-v2 environment. We then introduce additional uncertainty to the original problem to test the robustness of the mentioned techniques. With our best models, we are able to achieve average rewards of 170+ with the Sarsa agent and 200+ with the Deep Q-Learning agent on the original problem. We also show that these techniques are able to overcome the additional uncertainities and achieve positive average rewards of 100+ with both agents. We then perform a comparative analysis of the two techniques to conclude which agent peforms better.</p> 
+              <!-- <p align="justify"> Reinforcement Learning (RL) is an area of machine learning concerned with enabling an agent to navigate an environment with uncertainty in order to maximize some notion of cumulative long-term reward. In this paper, we implement and analyze two different RL techniques, Sarsa and Deep QLearning, on OpenAI Gym's LunarLander-v2 environment. We then introduce additional uncertainty to the original problem to test the robustness of the mentioned techniques. With our best models, we are able to achieve average rewards of 170+ with the Sarsa agent and 200+ with the Deep Q-Learning agent on the original problem. We also show that these techniques are able to overcome the additional uncertainities and achieve positive average rewards of 100+ with both agents. We then perform a comparative analysis of the two techniques to conclude which agent peforms better.</p>  -->
 
             </td>
           </tr>
@@ -413,6 +448,8 @@
       </td>
     </tr>
   </table>
+
+  
 </body>
 
 </html>

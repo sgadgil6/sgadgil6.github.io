@@ -1,544 +1,516 @@
-<!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- DELETE THIS SCRIPT if you use this HTML, otherwise my analytics will track your page -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-  <title>Soham Gadgil</title>
-  
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soham Gadgil | Personal Portfolio</title>
   <meta name="author" content="Soham Gadgil">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Soham Gadgil's personal academic portfolio website, showcasing research, publications, and experience in AI and Healthcare.">
   
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Local Stylesheet for Production -->
+  <link href="dist/output.css" rel="stylesheet">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Academicons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script>
-  $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip({
-          placement : 'bottom'
-      });
-  });
-  </script>
+  <!-- Favicon -->
+  <!-- <link rel="icon" type="image/png" href="images/seal_icon.png"> -->
+
   <style>
-    /* Customizing the tooltip */
-    .tooltip-inner {
-        background-color: black; /*Change background color*/
-        color: white; /* Change text color */
-        border-radius: 10px; /* Rounded corners */
-        font-size: 12x; /* Increase font size */
-        padding: 10px; /* Add padding */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+    /* Custom styles for a more immersive feel */
+    #immersive-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Places canvas behind content */
     }
-
-    /* Tooltip arrow customization */
-    .tooltip.bs-tooltip-top .tooltip-arrow {
-        border-top-color: #4CAF50; /* Match arrow color to the tooltip */
+    .animated-section {
+      opacity: 0;
     }
-
-    /* Animation for tooltip */
-    .fade {
-        transition: opacity 0.5s ease-in-out; /* Smooth fade-in/out effect */
+    .glass-card {
+      background: rgba(31, 41, 55, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
     }
-</style>
-  <link rel="icon" type="image/png" href="images/seal_icon.png">
+    .glass-card:hover {
+      background: rgba(31, 41, 55, 0.8);
+      border-color: rgba(56, 189, 248, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    }
+    .icon-link i, .icon-link svg {
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .icon-link:hover i, .icon-link:hover svg {
+        color: #38bdf8;
+        transform: scale(1.1);
+    }
+    
+    /* Custom Tooltip Styles */
+    [data-tooltip] {
+      position: relative;
+    }
+    /* Tooltip Body */
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background-color: #1F2937;
+      color: #F9FAFB;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      margin-top: 12px; /* Space for the arrow */
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    /* Tooltip Arrow */
+    [data-tooltip]::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent #1F2937 transparent;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      margin-top: 1px; /* Positions arrow just below the icon */
+      pointer-events: none;
+    }
+    [data-tooltip]:hover::after,
+    [data-tooltip]:hover::before {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
+    }
+  </style>
 </head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased">
+  
+  <!-- Immersive Background Canvas -->
+  <canvas id="immersive-background"></canvas>
 
-<body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Soham Gadgil</name>
-              </p>
-              <p>
-              Hi! I am a third year CSE PhD 
-              student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank">AIMS Lab</a>, advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank">Dr. Su-In Lee</a>. Prior to starting my Ph.D, I spent a year as a data engineer at Microsoft in the Windows Experience team.
-              </p>
-              <p class="content">
-              I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research asistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl">Dr. Kilian Pohl</a>. I was also part of the AI for Healthcare (<a href="https://stanfordmlgroup.github.io/programs/aihc-bootcamp/" target="_blank">AIHC</a>) bootcamp in the Stanford ML Group, advised by <a href="https://pranavrajpurkar.com/" target="_blank">Dr. Pranav Rajpurkar</a> and <a href="https://www.andrewng.org/" target="_blank">Dr. Andrew Ng</a>. I finished my Bachelor's at Georgia Institute of Technology, with a major in Computer Engineering and a minor in Computer Science.
-              </p>
-              <p class="content">I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies (especially legal thrillers).
-              <p style="text-align:center">
-                <a href="mailto:sgadgil@uw.edu"><span class="bi bi-envelope-at" data-toggle="tooltip" data-original-title="Email" style="font-size: 2rem;"></span></a> &nbsp&nbsp
-                <a href="data/Resume_Soham_Gadgil_PhD_2025.pdf" target="_blank"><span class="bi bi-file-pdf" data-toggle="tooltip" data-original-title="CV" style="font-size: 2rem;"></span></a></a> &nbsp&nbsp
-                <a href="https://scholar.google.com/citations?user=Tg2VT2UAAAAJ&hl=en&oi=ao" target="_blank"><i class="ai ai-google-scholar ai-2x" data-toggle="tooltip" data-original-title="Google Scholar" style="font-size: 2rem;"></i></a> &nbsp&nbsp
-                <a href="https://github.com/sgadgil6" target="_blank"><span class="bi bi-github" data-toggle="tooltip" data-original-title="GitHub" style="font-size: 2rem;"></span></a> &nbsp&nbsp
-                <a href="https://twitter.com/soham_gadgil" target="_blank"><span class="bi bi-twitter-x" data-toggle="tooltip" data-original-title="Twitter" style="font-size: 2rem;"></span></a> &nbsp&nbsp
-                <a href="https://www.linkedin.com/in/soham-gadgil-2729a9105/" target="_blank"><span class="bi bi-linkedin" data-toggle="tooltip" data-original-title="LinkedIn" style="font-size: 2rem;"></span></a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/profile_headshot.jpeg"><img style="width:100%;max-width:100%" alt="profile photo" src="images/profile_headshot.jpeg" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:10px;width:100%;vertical-align:middle">
-              <heading>Research</heading>
-              <hr>
-              <p>
-                The research problems I want to work on lie at the interesection of Artificial Intelligence and Healthcare. Some of my current research interests include: 
-              </p>
-              <p class="content">
-              <ul>
-                <li><b><i>Clinical AI:</i></b> Using multi-modal data (images, text, etc.) with deep learning to perform diagnoses and treatment of various ailments. </li> 
-                <li><b><i>Explainability:</i></b> Developing AI techniques to increase model interpretability in settings where features are not trivial to obtain (like Emergency Medicine), auditing AI models to make them more trustworthy by exploring causal relationships between inputs and predictions. </li> 
+  <!-- Floating Header -->
+  <header class="sticky top-0 z-50 transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-6 py-3">
+        <div class="flex justify-between items-center bg-brand-secondary/50 backdrop-blur-md rounded-xl p-4 border border-white/10 shadow-lg">
+            <h1 class="text-xl font-bold text-brand-heading">Soham Gadgil</h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+                <a href="#research" class="hover:text-brand-accent transition-colors">Research</a>
+                <a href="#achievements" class="hover:text-brand-accent transition-colors">Achievements</a>
+                <a href="#publications" class="hover:text-brand-accent transition-colors">Publications</a>
+                <a href="#experience" class="hover:text-brand-accent transition-colors">Experience</a>
+                <a href="#teaching" class="hover:text-brand-accent transition-colors">Teaching</a>
+            </nav>
+        </div>
+    </div>
+  </header>
 
-              </ul>
-              </p>
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12">
 
-            </td>
-          </tr>
-        </tbody></table>
+    <!-- About Section -->
+    <section id="about" class="min-h-[80vh] flex items-center justify-center animated-section">
+      <div class="w-full flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-2/3 space-y-4 text-center md:text-left">
+          <h2 class="text-4xl md:text-5xl font-bold text-brand-heading leading-tight">Soham Gadgil</h2>
+          <p class="text-lg text-brand-accent">Ph.D. Student in Computer Science & Engineering at the University of Washington</p>
+          <p>
+            Hi! I am a third year CSE PhD student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank" class="text-brand-accent hover:underline">AIMS Lab</a>, advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank" class="text-brand-accent hover:underline">Dr. Su-In Lee</a>. Prior to starting my Ph.D, I spent a year as a data engineer at Microsoft in the Windows Experience team.
+          </p>
+          <p>
+            I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research assistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/" target="_blank" class="text-brand-accent hover:underline">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl" class="text-brand-accent hover:underline">Dr. Kilian Pohl</a>. I was also part of the AI for Healthcare (<a href="https://stanfordmlgroup.github.io/programs/aihc-bootcamp/" target="_blank" class="text-brand-accent hover:underline">AIHC</a>) bootcamp in the Stanford ML Group, advised by <a href="https://pranavrajpurkar.com/" target="_blank" class="text-brand-accent hover:underline">Dr. Pranav Rajpurkar</a> and <a href="https://www.andrewng.org/" target="_blank" class="text-brand-accent hover:underline">Dr. Andrew Ng</a>. I finished my Bachelor's at Georgia Institute of Technology, with a major in Computer Engineering and a minor in Computer Science.
+          </p>
+          <p>
+            I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank" class="text-brand-accent hover:underline">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies (especially legal thrillers).
+          </p>
+          <div class="flex justify-center md:justify-start items-center space-x-6 pt-4 text-3xl text-brand-text">
+            <a href="mailto:sgadgil@uw.edu" class="icon-link" data-tooltip="Email"><i class="bi bi-envelope-at"></i></a>
+            <a href="data/Resume_Soham_Gadgil_PhD_2025.pdf" target="_blank" class="icon-link" data-tooltip="CV"><i class="bi bi-file-pdf"></i></a>
+            <a href="https://scholar.google.com/citations?user=Tg2VT2UAAAAJ&hl=en&oi=ao" target="_blank" class="icon-link" data-tooltip="Google Scholar"><i class="ai ai-google-scholar-square"></i></a>
+            <a href="https://github.com/sgadgil6" target="_blank" class="icon-link" data-tooltip="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://twitter.com/soham_gadgil" target="_blank" class="icon-link" data-tooltip="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.linkedin.com/in/soham-gadgil-2729a9105/" target="_blank" class="icon-link" data-tooltip="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="md:w-1/3 flex-shrink-0">
+          <img src="images/profile_headshot.jpeg" alt="Soham Gadgil" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-brand-secondary shadow-2xl">
+        </div>
+      </div>
+    </section>
+    
+    <!-- Section Divider -->
+    <div class="my-20 border-b border-white/10"></div>
+    
+    <!-- Research Section -->
+    <section id="research" class="space-y-8 animated-section scroll-mt-24">
+      <h2 class="text-3xl font-bold text-center text-brand-heading mb-8">Research</h2>
+      <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
+        <p class="text-left mb-8">
+          The research problems I want to work on lie at the intersection of Artificial Intelligence and Healthcare. Some of my current research interests include:
+        </p>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-bold text-brand-heading mb-1">Clinical AI</h3>
+            <p class="text-sm pl-4">Using multi-modal data (images, text, etc.) with deep learning to perform diagnoses and treatment of various ailments.</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-brand-heading mb-1">Explainability</h3>
+            <p class="text-sm pl-4">Developing AI techniques to increase model interpretability in settings where features are not trivial to obtain (like Emergency Medicine), auditing AI models to make them more trustworthy by exploring causal relationships between inputs and predictions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10">
-          <tr>
-            <td>
-              <heading>Achievements</heading>
-              <hr>
-              <ul>
-                <li>Won the best paper runner-up award at the CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank">DCAMI Workshop</a>.</li>
-                <li>Accepted into the ORS (<a href="https://ors.ece.gatech.edu/" target="_blank">Opportunity Research Scholars</a>) program for undergraduate research at Georgia Tech.</li>
-                <li>Awarded <a href="https://registrar.gatech.edu/info/faculty-honors-letters" target="_blank"> Faculty Honors </a> by Georgia Tech for all semesters in my undergraduate degree. </li>
-                <li>Recipient of the Electrical and Computer Engineering (ECE) Senior award for highest academic average.</a></li>
-                <li>Won the best <a href="https://web.stanford.edu/class/aa228/reports/2019/final8.pdf" target="_blank">final paper</a> award at Stanford for CS 238 (<a href="https://web.stanford.edu/class/aa228/cgi-bin/wp/" target="_blank">Decision Making Under Uncertainty)</a>.</li>
-                <li>Part of the teaching team that developed and first offered the <a href="https://web.stanford.edu/class/cs329t/" target="_blank">Trustworthy Machine Learning (CS 329T)</a> course at Stanford.
-              </ul>
-            </td>
-          </tr>
-        </table>
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-              <heading>Preprints</heading>
-              <hr>
-            </td>
-          </tr>
-        </tbody></table>
+    <!-- Section Divider -->
+    <div class="my-20 border-b border-white/10"></div>
+    
+    <!-- Achievements Section -->
+    <section id="achievements" class="space-y-8 animated-section scroll-mt-24">
+        <h2 class="text-3xl font-bold text-center text-brand-heading">Achievements</h2>
+        <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
+            <ul class="list-disc list-outside space-y-3 pl-5">
+                <li>Won the best paper runner-up award at the CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a>.</li>
+                <li>Accepted into the ORS (<a href="https://ors.ece.gatech.edu/" target="_blank" class="text-brand-accent hover:underline">Opportunity Research Scholars</a>) program for undergraduate research at Georgia Tech.</li>
+                <li>Awarded <a href="https://registrar.gatech.edu/info/faculty-honors-letters" target="_blank" class="text-brand-accent hover:underline"> Faculty Honors </a> by Georgia Tech for all semesters in my undergraduate degree.</li>
+                <li>Recipient of the Electrical and Computer Engineering (ECE) Senior award for highest academic average.</li>
+                <li>Won the best <a href="https://web.stanford.edu/class/aa228/reports/2019/final8.pdf" target="_blank" class="text-brand-accent hover:underline">final paper</a> award at Stanford for CS 238.</li>
+                <li>Part of the team that first offered the <a href="https://web.stanford.edu/class/cs329t/" target="_blank" class="text-brand-accent hover:underline">Trustworthy Machine Learning (CS 329T)</a> course at Stanford.</li>
+            </ul>
+        </div>
+    </section>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td width="30%"><img src="images/ensembling_fig.png" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">  <!-- Note: width is 100% as there's no image column -->
-              <a href="https://arxiv.org/abs/2505.16077" target="_blank"><papertitle>Ensembling Sparse Autoencoders</papertitle></a>
-              <br>
-              <strong>Soham Gadgil<sup>*</sup></strong>, Chris Lin<sup>*</sup>, Su-In Lee
-              <br>
-              <em>Preprint (Under Review)</em>
-              <br>
-              <a href="https://arxiv.org/abs/2505.16077" target="_blank">[Paper]</a>
-            </td>
-          </tr>
-        </tbody></table>
+    <!-- Section Divider -->
+    <div class="my-20 border-b border-white/10"></div>
+    
+    <!-- Publications Section -->
+    <section id="publications" class="space-y-8 animated-section scroll-mt-24">
+      <h2 class="text-3xl font-bold text-center text-brand-heading mb-8">Publications</h2>
+      <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
+        <!-- Preprints -->
+        <div>
+          <h3 class="text-2xl font-semibold text-brand-heading mb-4 border-b border-white/10 pb-2">Preprints</h3>
+          <div class="space-y-6">
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Ensembling Sparse Autoencoders</h4>
+              <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Chris Lin<sup>*</sup>, Su-In Lee</p>
+              <p class="text-sm italic text-gray-400">Preprint (Under Review)</p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/abs/2505.16077" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="my-8 border-b border-white/0"></div>
+        <!-- Published Papers -->
+        <div>
+          <h3 class="text-2xl font-semibold text-brand-heading mb-6 border-b border-white/10 pb-2">Peer-Reviewed</h3>
+          <div class="space-y-8">
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Transparency of medical artificial intelligence systems</h4>
+              <p class="text-sm">Chanwoo Kim*, <strong>Soham Gadgil*</strong>, Su-In Lee</p>
+              <p class="text-sm italic text-gray-400">Nature Reviews Bioengineering 2025 (Accepted in principle)</p>
+            </div>
+             <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Transformer-based Time-Series Biomarker Discovery for COPD Diagnosis</h4>
+              <p class="text-sm"><strong>Soham Gadgil</strong>, Joshua Galanter, Mohammadreza Negahdar</p>
+              <p class="text-sm italic text-gray-400">NeurIPS 2024 <a href="https://neurips-time-series-workshop.github.io/" target="_blank" class="text-brand-accent hover:underline">TSALM Workshop</a> & <a href="https://conference.thoracic.org/" target="_blank" class="text-brand-accent hover:underline">ATS 2025</a></p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/abs/2411.09027" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+              </div>
+            </div>
+             <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Discovering mechanisms underlying medical AI prediction of protected attributes</h4>
+              <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Alex J. DeGrave<sup>*</sup>, Roxana Daneshjou, Su-In Lee</p>
+              <p class="text-sm italic text-gray-400">CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a> <strong class="text-amber-400">(Oral, Best Paper Runner-Up)</strong></p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v1.full.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+              </div>
+            </div>
+             <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Estimating Conditional Mutual Information for Dynamic Feature Selection</h4>
+              <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Ian Covert<sup>*</sup>, Su-In Lee</p>
+              <p class="text-sm italic text-gray-400">ICLR 2024</p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/pdf/2306.03301.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                <a href="https://github.com/suinleelab/DIME" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+              </div>
+            </div>
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Data Alignment for Zero-Shot Concept Generation in Dermatology AI</h4>
+              <p class="text-sm"><strong>Soham Gadgil</strong>, Mahtab Bigverdi</p>
+              <p class="text-sm italic text-gray-400">ICLR 2024 <a href="https://sites.google.com/view/dpfm-iclr24/home" target="_blank" class="text-brand-accent hover:underline">DPFM Workshop</a></p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/pdf/2404.13043" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+              </div>
+            </div>
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+                <h4 class="text-lg font-semibold text-brand-heading">Fostering transparent medical image AI via an image-text foundation model grounded in medical literature</h4>
+                <p class="text-sm">Chanwoo Kim, <strong>Soham Gadgil</strong>, Alex J. DeGrave, Zhuo Ran Cai, Roxana Daneshjou, Su-In Lee</p>
+                <p class="text-sm italic text-gray-400">Nature Medicine 2024</p>
+                <div class="flex flex-wrap gap-x-4 text-sm font-semibold pt-1">
+                  <a href="https://www.medrxiv.org/content/medrxiv/early/2023/06/12/2023.06.07.23291119.full.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                  <a href="https://github.com/suinleelab/MONET" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+                  <a href="https://www.msn.com/en-gb/health/other/monet-new-ai-tool-enhances-medical-imaging-with-deep-learning-and-text-analysis/ar-AA1niGbn" target="_blank" class="text-brand-accent hover:underline">[Press]</a>
+                </div>
+            </div>
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+                <h4 class="text-lg font-semibold text-brand-heading">CheXseg: Combining Expert Annotations with DNN-generated Saliency Maps for X-ray Segmentation</h4>
+                <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Mark Endo<sup>*</sup>, Emily Wen<sup>*</sup>, Andrew Y. Ng, Pranav Rajpurkar</p>
+                <p class="text-sm italic text-gray-400">MIDL 2021</p>
+                <div class="flex space-x-4 text-sm font-semibold pt-1">
+                    <a href="https://proceedings.mlr.press/v143/gadgil21a/gadgil21a.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                    <a href="https://github.com/stanfordmlgroup/CheXseg" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+                </div>
+            </div>
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+                <h4 class="text-lg font-semibold text-brand-heading">Spatio-Temporal Graph Convolution for Resting-State fMRI Analysis</h4>
+                <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Qingyu Zhao<sup>*</sup>, Adolf Pfefferbaum<sup>*</sup>, Edith V. Sullivan, Ehsan Adeli, Kilian M. Pohl</p>
+                <p class="text-sm italic text-gray-400">MICCAI 2020</p>
+                <div class="flex space-x-4 text-sm font-semibold pt-1">
+                    <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700758/pdf/nihms-1645484.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                    <a href="https://github.com/sgadgil6/cnslab_fmri" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+                </div>
+            </div>
+            <!-- Publication Entry -->
+            <div class="space-y-1">
+                <h4 class="text-lg font-semibold text-brand-heading">Solving The Lunar Lander Problem under Uncertainty using Reinforcement Learning</h4>
+                <p class="text-sm"><strong>Soham Gadgil</strong>, Yunfeng Xin, Chengzhe Xu</p>
+                <p class="text-sm italic text-gray-400">IEEE SouthEastCon 2020</p>
+                <div class="flex space-x-4 text-sm font-semibold pt-1">
+                    <a href="https://ieeexplore.ieee.org/abstract/document/9368267" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                    <a href="https://github.com/sgadgil6/lunar_lander_project" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-              <heading>Publications</heading>
-              <hr>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <!-- <heading>Publications</heading> -->
-           <tr>
-            <td width="30%"><img src="images/transparent_ai_review.png" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              <papertitle>Transparency of medical artificial intelligence systems</papertitle>
-            <br>
-            Chanwoo Kim*,
-            <strong>Soham Gadgil* </strong>,
-            Su-In Lee
-            <br>
-              <em>Nature Reviews Bioengineering 2025 (Accepted in principle)</em><br />
-            </td>
-          </tr>
-          <tr>
-            <td width="30%"><img src="images/tsalm_fig.png" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://arxiv.org/abs/2411.09027" target="_blank"><papertitle>Transformer-based Time-Series Biomarker Discovery
-                for COPD Diagnosis</papertitle>
-              </a>
-            <br>
-            <strong> Soham Gadgil </strong>,
-            Joshua Galanter,
-            Mohammadreza Negahdar
-            <br>
-              <em>NeurIPS 2024 <a href="https://neurips-time-series-workshop.github.io/" target="_blank">TSALM Workshop</a></em><br />
-              <em><a href="https://conference.thoracic.org/" target="_blank">ATS (American Thoracic Society) 2025</a></em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://arxiv.org/abs/2411.09027" target="_blank"> [Paper]</a>
-            </td>
-          </tr>
-          <tr>
-            <td width="30%"><img src="images/concept_figure_protected_attributes.png" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v1.full.pdf" target="_blank"><papertitle>Discovering mechanisms underlying medical AI prediction of protected
-                attributes</papertitle>
-              </a>
-            <br>
-            <strong> Soham Gadgil <sup>*</sup></strong>,
-            Alex J. DeGrave <sup>*</sup>,
-            Roxana Daneshjou,
-            Su-In Lee
-            <br>
-              <em>CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank">DCAMI Workshop</a> <strong>(Oral, Best Paper Runner-Up Award)</strong> </em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v1.full.pdf" target="_blank"> [Paper]</a>
-              <!-- <p align="justify"> Recent advances in Artificial Intelligence (AI) have
-                started disrupting the healthcare industry, especially medical imaging, and AI devices are increasingly being deployed
-                into clinical practice. Such classifiers have previously
-                demonstrated the ability to discern a range of protected demographic attributes (like race, age, sex) from medical images with unexpectedly high performance, a sensitive task
-                which is difficult even for trained physicians. Focusing on
-                the task of predicting sex from dermoscopic images of skin
-                lesions, we are successfully able to train high-performing
-                classifiers achieving a ROC-AUC score of ~0.78. We highlight how incorrect use of these demographic shortcuts can
-                have a detrimental effect on the performance of a clinically
-                relevant downstream task like disease diagnosis under a domain shift. Further, we employ various explainable AI (XAI)
-                techniques to identify specific signals which can be leveraged to predict sex. Finally, we introduce a technique to
-                quantify how much a signal contributes to the classification
-                performance. Using this technique and the signals identified, we are able to explain ~44% of the total performance.
-                This analysis not only underscores the importance of cautious AI application in healthcare but also opens avenues
-                for improving the transparency and reliability of AI-driven
-                diagnostic tools.</p>  -->
-            </td>
-          </tr>
-          <tr>
-            <td width="30%"><img src="images/CMI_Concept.jpg" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://arxiv.org/pdf/2306.03301.pdf" target="_blank"><papertitle>Estimating Conditional Mutual Information for Dynamic Feature Selection</papertitle>
-              </a>
-            <br>
-            <strong> Soham Gadgil <sup>*</sup></strong>,
-            Ian Covert <sup>*</sup>,
-            Su-In Lee
-            <br>
-              <em>ICLR 2024</em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://arxiv.org/pdf/2306.03301.pdf" target="_blank"> [Paper]</a>
-              <a href="https://github.com/suinleelab/DIME" target="_blank"> [Code]</a>
-              <!-- <p align="justify"> Dynamic feature selection, where we sequentially query features to make accurate
-                predictions with a minimal budget, is a promising paradigm to reduce feature
-                acquisition costs and provide transparency into the prediction process. The problem is challenging, however, as it requires both making predictions with arbitrary
-                feature sets and learning a policy to identify the most valuable selections. Here,
-                we take an information-theoretic perspective and prioritize features based on their
-                mutual information with the response variable. The main challenge is learning
-                this selection policy, and we design a straightforward new modeling approach
-                that estimates the mutual information in a discriminative rather than generative
-                fashion. Building on our learning approach, we introduce several further improvements: allowing variable feature budgets across samples, enabling non-uniform
-                costs between features, incorporating prior information, and exploring modern
-                architectures to handle partial input information. We find that our method provides
-                consistent gains over recent state-of-the-art methods across a variety of datasets.</p>  -->
-            </td>
-          </tr>
-          <tr>
-            <td width="30%"><img src="images/dpfm_fig.png" alt="3DSP" width="250" height="150" style="border-style: none">
-              <br>
-            <td valign="top" width="70%">
-              <a href="https://arxiv.org/pdf/2404.13043" target="_blank"><papertitle>Data Alignment for Zero-Shot Concept Generation in Dermatology AI</papertitle>
-              </a>
-            <br>
-            <strong> Soham Gadgil</strong>,
-            Mahtab Bigverdi
-            <br>
-              <em>ICLR 2024 <a href="https://sites.google.com/view/dpfm-iclr24/home" target="_blank">DPFM workshop</a></em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://arxiv.org/pdf/2404.13043" target="_blank"> [Paper]</a>
-              <!-- <p align="justify"> Dynamic feature selection, where we sequentially query features to make accurate
-                predictions with a minimal budget, is a promising paradigm to reduce feature
-                acquisition costs and provide transparency into the prediction process. The problem is challenging, however, as it requires both making predictions with arbitrary
-                feature sets and learning a policy to identify the most valuable selections. Here,
-                we take an information-theoretic perspective and prioritize features based on their
-                mutual information with the response variable. The main challenge is learning
-                this selection policy, and we design a straightforward new modeling approach
-                that estimates the mutual information in a discriminative rather than generative
-                fashion. Building on our learning approach, we introduce several further improvements: allowing variable feature budgets across samples, enabling non-uniform
-                costs between features, incorporating prior information, and exploring modern
-                architectures to handle partial input information. We find that our method provides
-                consistent gains over recent state-of-the-art methods across a variety of datasets.</p>  -->
-            </td>
-          </tr>
-          <tr>
-            <td width="30%"><img src="images/MONET_Concept.png" alt="3DSP" width="250" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://www.medrxiv.org/content/medrxiv/early/2023/06/12/2023.06.07.23291119.full.pdf" target="_blank"><papertitle>Fostering transparent medical image AI via an image-text foundation model grounded in medical literature</papertitle>
-              </a>
-            <br>
-            Chanwoo Kim,
-            <strong>Soham Gadgil</strong>,
-            Alex J. DeGrave,
-            Zhuo Ran Cai,
-            Roxana Daneshjou,
-            Su-In Lee
-            <br>
-              <em>Nature Medicine 2024</em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://www.medrxiv.org/content/medrxiv/early/2023/06/12/2023.06.07.23291119.full.pdf" target="_blank"> [Paper]</a>
-              <a href="https://github.com/suinleelab/MONET" target="_blank"> [Code]</a>
-              <a href="https://www.msn.com/en-gb/health/other/monet-new-ai-tool-enhances-medical-imaging-with-deep-learning-and-text-analysis/ar-AA1niGbn" target="_blank"> [Press]</a>
-              <a href="https://news.cs.washington.edu/2024/09/11/monet-helps-paint-a-clearer-picture-of-medical-ai-systems/" target="_blank"> [Allen School News]</a>
-
-              <!-- <p align="justify"> Building trustworthy and transparent image-based medical AI systems requires the ability to interrogate data and
-                models at all stages of the development pipeline: from training models to post-deployment monitoring. Ideally,
-                the data and associated AI systems could be described using terms already familiar to physicians, but this requires
-                medical datasets densely annotated with semantically meaningful concepts. Here, we present a foundation model
-                approach, named MONET (Medical cONcept rETriever), which learns how to connect medical images with text and
-                generates dense concept annotations to enable tasks in AI transparency from model auditing to model interpretation.
-                Dermatology provides a demanding use case for the versatility of MONET, due to the heterogeneity in diseases, skin
-                tones, and imaging modalities. We trained MONET on the basis of 105,550 dermatological images paired with natural
-                language descriptions from a large collection of medical literature. MONET can accurately annotate concepts across
-                dermatology images as verified by board-certified dermatologists, outperforming supervised models built on previously
-                concept-annotated dermatology datasets. We demonstrate how MONET enables AI transparency across the entire AI
-                development pipeline from dataset auditing to model auditing to building inherently interpretable models.</p>  -->
-
-            </td>
-          </tr>
-          
-          <tr>
-            <td width="30%"><img src="images/chexseg_concept.png" alt="3DSP" width="250" height="120" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://proceedings.mlr.press/v143/gadgil21a/gadgil21a.pdf" target="_blank"><papertitle>CheXseg: Combining Expert Annotations with DNN-generated Saliency Maps for X-ray Segmentation</papertitle>
-              </a>
-            <br>
-            <strong>Soham Gadgil</strong> <sup>*</sup>,
-            Mark Endo <sup>*</sup>,
-            Emily Wen <sup>*</sup>,
-            Andrew Y. Ng,
-            Pranav Rajpurkar
-            <br>
-              <em>MIDL 2021</em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://proceedings.mlr.press/v143/gadgil21a/gadgil21a.pdf" target="_blank">[Paper]</a>
-              <a href="https://github.com/stanfordmlgroup/CheXseg" target="_blank">[Code]</a>
-
-              <!-- <p align="justify"> Medical image segmentation models are typically supervised by expert annotations at the
-                pixel-level, which can be expensive to acquire. In this work, we propose a method that
-                combines the high quality of pixel-level expert annotations with the scale of coarse DNNgenerated saliency maps for training multi-label semantic segmentation models. We demonstrate the application of our semi-supervised method, which we call CheXseg, on multilabel chest X-ray interpretation. We find that CheXseg improves upon the performance
-                (mIoU) of fully-supervised methods that use only pixel-level expert annotations by 9.7%
-                and weakly-supervised methods that use only DNN-generated saliency maps by 73.1%. Our
-                best method is able to match radiologist agreement on three out of ten pathologies and
-                reduces the overall performance gap by 57.2% as compared to weakly-supervised methods.</p>  -->
-
-            </td>
-          </tr>
-          
-          <tr>
-            <td width="30%"><img src="images/stgcn_concept.png" alt="3DSP" width="250" height="120" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700758/pdf/nihms-1645484.pdf" target="_blank"><papertitle>Spatio-Temporal Graph Convolution for Resting-State fMRI Analysis</papertitle>
-              </a>
-            <br>
-            <strong>Soham Gadgil</strong> <sup>*</sup>,
-            Qingyu Zhao <sup>*</sup>,
-            Adolf Pfefferbaum <sup>*</sup>,
-            Edith V. Sullivan,
-            Ehsan Adeli,
-            Kilian M. Pohl
-            <br>
-              <em>MICCAI 2020</em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700758/pdf/nihms-1645484.pdf" target="_blank">[Paper]</a>
-              <a href="https://github.com/sgadgil6/cnslab_fmri" target="_blank">[Code]</a>
-
-              <!-- <p align="justify"> The Blood-Oxygen-Level-Dependent (BOLD) signal of resting-state fMRI (rs-fMRI) records the
-                temporal dynamics of intrinsic functional networks in the brain. However, existing deep learning
-                methods applied to rs-fMRI either neglect the functional dependency between different brain
-                regions in a network or discard the information in the temporal dynamics of brain activity. To
-                overcome those shortcomings, we propose to formulate functional connectivity networks within
-                the context of spatio-temporal graphs. We train a spatio-temporal graph convolutional network
-                (ST-GCN) on short sub-sequences of the BOLD time series to model the non-stationary nature of
-                functional connectivity. Simultaneously, the model learns the importance of graph edges within
-                ST-GCN to gain insight into the functional connectivities contributing to the prediction. In
-                analyzing the rs-fMRI of the Human Connectome Project (HCP, N = 1,091) and the National
-                Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA, N = 773), ST-GCN is
-                significantly more accurate than common approaches in predicting gender and age based on
-                BOLD signals. Furthermore, the brain regions and functional connections significantly
-                contributing to the predictions of our model are important markers according to the neuroscience
-                literature.</p>  -->
-
-            </td>
-          </tr>
-
-          <tr>
-            <td width="30%"><img src="images/dqn_fig.png" alt="3DSP" width="250" height="120" style="border-style: none">
-            <td valign="top" width="70%">
-              <a href="https://ieeexplore.ieee.org/abstract/document/9368267" target="_blank"><papertitle>Solving The Lunar Lander Problem under Uncertainty using Reinforcement Learning
-              </papertitle>
-              </a>
-            <br>
-            <strong>Soham Gadgil</strong>,
-              Yunfeng Xin,
-              Chengzhe Xu
-            <br>
-              <em>IEEE SouthEastCon 2020</em> 
-              <!-- <font color="red">(Poster)</font> -->
-              <br>
-              <a href="https://ieeexplore.ieee.org/abstract/document/9368267" target="_blank">[Paper]</a>
-              <a href="https://github.com/sgadgil6/lunar_lander_project" target="_blank">[Code]</a>
-              <!-- <p align="justify"> Reinforcement Learning (RL) is an area of machine learning concerned with enabling an agent to navigate an environment with uncertainty in order to maximize some notion of cumulative long-term reward. In this paper, we implement and analyze two different RL techniques, Sarsa and Deep QLearning, on OpenAI Gym's LunarLander-v2 environment. We then introduce additional uncertainty to the original problem to test the robustness of the mentioned techniques. With our best models, we are able to achieve average rewards of 170+ with the Sarsa agent and 200+ with the Deep Q-Learning agent on the original problem. We also show that these techniques are able to overcome the additional uncertainities and achieve positive average rewards of 100+ with both agents. We then perform a comparative analysis of the two techniques to conclude which agent peforms better.</p>  -->
-
-            </td>
-          </tr>
-
-
-        </tbody></table>
-
-
-        
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10">
-          <tr>
-            <td>
-              <heading>Other Experiences</heading>
-
-        <hr>
-              <ul>
+    <!-- Section Divider -->
+    <div class="my-20 border-b border-white/10"></div>
+    
+    <!-- Other Experiences Section -->
+    <section id="experience" class="space-y-8 animated-section scroll-mt-24">
+        <h2 class="text-3xl font-bold text-center text-brand-heading">Other Experiences</h2>
+        <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
+            <ul class="list-disc list-outside space-y-3 pl-5">
                 <li>Reviewer: ICLR 2025, ICML 2025, NeurIPS 2024, MIDL 2022, ICLR 2024 DPFM Workshop, AISTATS 2025 Good Data Workshop</li>
                 <li>President of Georgia Tech IEEE, leading the largest IEEE student branch in the US with over 800 members.</li>
                 <li>International Liasion for the Student Alumni Association at Georgia Tech.</li>
                 <li>Peer leader in freshmen and senior student dormitories.</li>
-                
-              </ul>
-            </td>
-          </tr>
-        </table>
+            </ul>
+        </div>
+    </section>
 
+    <!-- Section Divider -->
+    <div class="my-20 border-b border-white/10"></div>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-              <heading>Teaching Assistantships</heading>
-              
-            </td>
-          </tr>
-        </tbody></table>
-        <hr>
-        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-            <h5>University of Washington</h5>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <!-- <heading>Publications</heading> -->
-          <tr>
-            <td width="30%"><img src="images/cse473.jpeg" alt="cs_107" width="200" height="150" style="border-style: 2px">
-            <td valign="top" width="70%">
-              
-                      <papertitle>Introduction to AI (<a href="https://courses.cs.washington.edu/courses/cse473/22au/" target="_blank">CSE 473</a>)</papertitle>
-            
-            <br>
-              <!-- <font color="red">(Poster)</font> -->
-
-              <p align="justify">The course covers principal ideas and developments in artificial intelligence: Problem solving and search, game playing, knowledge representation and reasoning, uncertainty, machine learning, natural language processing. I held weekly office hours and assisted in preparing/grading the homework assignments.</p> 
-            </td>
-          </tr>
-
-        </tbody></table>
-
-
-        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-            <h5>Stanford</h5>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <!-- <heading>Publications</heading> -->
-          <tr>
-            <td width="30%"><img src="images/cs_107_img.png" alt="cs_107" width="150" height="150" style="border-style: 2px">
-            <td valign="top" width="70%">
-              
-                      <papertitle>Computer Organization and Systems (<a href="http://web.stanford.edu/class/cs107/" target="_blank">CS 107</a>)</papertitle>
-            
-            <br>
-              <!-- <font color="red">(Poster)</font> -->
-
-              <p align="justify">TA for CS 107, one of the largest introductory undergraduate courses at Stanford with over 150 students. I led two hour-long lab sessions each week along with office hours and assisted the professor in grading homework and desiging exams. Topics included the C programming language, data representation, machine-level code, computer arithmetic, elements of code compilation, optimization of memory and runtime performance, and memory organization and management.</p> 
-            </td>
-          </tr>
-
-          <tr></tr>
-          <tr>
-            <td width="30%"><img src="images/trust_ml.jpg" alt="iswc2018" width="200" height="170" style="border-style: none">
-            <td valign="top" width="70%">
-                      <papertitle>Trustworthy Machine Learning (<a href="https://web.stanford.edu/class/cs329t/" target="_blank">CS 329T</a>)</papertitle>
-              <p align="justify"> TA for the first course offering of CS 329T. I co-developed and led the lab sections with ~25 students. I also helped the instructors design some of the lecture slides, homework assignments, and the final project.</p> 
-            </td>
-          </tr>
-
-        </tbody></table>
-        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
-          <tr>
-            <td>
-              <h5>Georgia Tech</h5>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <!-- <heading>Publications</heading> -->
-          <tr>
-            <td width="30%"><img src="images/linear_algebra.png" alt="linear_alg" width="220" height="150" style="border-style: none">
-            <td valign="top" width="70%">
-              
-                      <papertitle>Linear Algebra (<a href="https://math.gatech.edu/courses/math/1554" target="_blank">MATH 1554</a>)</papertitle>
-            
-            <br>
-              <!-- <font color="red">(Poster)</font> -->
-
-              <p align="justify">As a TA for linear algebra, I led two 50 minute recitation sessions with 25 students each week. Concepts ranged from eigenvalues, eigenvectors, applications to linear systems, least squares, diagonalization, quadratic forms. </p> 
-            </td>
-          </tr>
-
-          <tr></tr>
-          <tr>
-            <td width="30%"><img src="images/comp_arch.png" alt="comp_arch" width="200" height="100" style="border-style: none">
-            <td valign="top" width="70%">
-                      <papertitle>Computer Architecture (<a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f18/" target="_blank">CS 3056</a>)</papertitle>
-              <p align="justify"> Guided over 60 students with homeworks and projects in computer architecture. Held weekly office hours, exam review sessions, and collaborated with the instructor for grading and project ideation. Topics included the basic organizational principles of the major components of a processor - the core, memory hierarchy, and the I/O subsystem.</p> 
-            </td>
-          </tr>
-
-        </tbody></table>
-        
-        
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:0px">
-                  <hr>
-                  <p align="center">
-                  <font>(Design and CSS courtesy: <a href="https://jonbarron.info/" target="_blank">Jon Barron</a> and <a href="https://abhoi.github.io/" target="_blank">Amlaan Bhoi</a>)</font>
-                  </p>
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
-      </td>
-    </tr>
-  </table>
-
+    <!-- Teaching Section -->
+    <section id="teaching" class="space-y-8 animated-section scroll-mt-24">
+      <h2 class="text-3xl font-bold text-center text-brand-heading mb-8">Teaching Assistantships</h2>
+      <div class="max-w-4xl mx-auto glass-card rounded-lg p-8 space-y-8">
+        <!-- University of Washington -->
+        <div>
+          <h3 class="text-xl font-bold text-brand-heading mb-4">University of Washington</h3>
+          <div class="space-y-1 pl-4">
+            <h4 class="text-lg font-semibold text-brand-heading">Introduction to AI (<a href="https://courses.cs.washington.edu/courses/cse473/22au/" target="_blank" class="text-brand-accent hover:underline">CSE 473</a>)</h4>
+            <p class="text-sm">The course covers principal ideas and developments in artificial intelligence: Problem solving and search, game playing, knowledge representation and reasoning, uncertainty, machine learning, natural language processing. I held weekly office hours and assisted in preparing/grading the homework assignments.</p>
+          </div>
+        </div>
+        <!-- Stanford -->
+        <div>
+          <h3 class="text-xl font-bold text-brand-heading mb-4">Stanford</h3>
+          <div class="space-y-6 pl-4">
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Computer Organization and Systems (<a href="http://web.stanford.edu/class/cs107/" target="_blank" class="text-brand-accent hover:underline">CS 107</a>)</h4>
+              <p class="text-sm">TA for CS 107, one of the largest introductory undergraduate courses at Stanford. I led lab sessions, held office hours, and assisted in grading and designing exams. Topics included C programming, data representation, machine-level code, computer arithmetic, compilation, performance optimization, and memory management.</p>
+            </div>
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Trustworthy Machine Learning (<a href="https://web.stanford.edu/class/cs329t/" target="_blank" class="text-brand-accent hover:underline">CS 329T</a>)</h4>
+              <p class="text-sm">TA for the first course offering of CS 329T. I co-developed and led the lab sections. I also helped the instructors design lecture slides, homework assignments, and the final project.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Georgia Tech -->
+        <div>
+          <h3 class="text-xl font-bold text-brand-heading mb-4">Georgia Tech</h3>
+          <div class="space-y-6 pl-4">
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Linear Algebra (<a href="https://math.gatech.edu/courses/math/1554" target="_blank" class="text-brand-accent hover:underline">MATH 1554</a>)</h4>
+              <p class="text-sm">As a TA for linear algebra, I led two 50 minute recitation sessions each week. Concepts ranged from eigenvalues, eigenvectors, applications to linear systems, least squares, diagonalization, quadratic forms.</p>
+            </div>
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">Computer Architecture (<a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f18/" target="_blank" class="text-brand-accent hover:underline">CS 3056</a>)</h4>
+              <p class="text-sm">Guided over 60 students with homeworks and projects in computer architecture. Held weekly office hours, exam review sessions, and collaborated with the instructor for grading and project ideation. Topics included the basic organizational principles of the processor core, memory hierarchy, and the I/O subsystem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
   
-</body>
+  <!-- Footer -->
+  <footer class="text-center py-8 mt-16 border-t border-white/10">
+      <p class="text-xs text-gray-500">
+          Designed with Tailwind CSS
+      </p>
+  </footer>
 
+  <script>
+    // Simple Intersection Observer for fade-in animations
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll('.animated-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Sticky header background change on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // Immersive particle background
+        const canvas = document.getElementById('immersive-background');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                let color = 'rgba(209, 213, 219, 0.2)';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(209, 213, 219, ${opacityValue * 0.1})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+        
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+    });
+  </script>
+
+</body>
 </html>
+
+

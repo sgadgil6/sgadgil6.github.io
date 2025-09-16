@@ -1,0 +1,20 @@
+{
+  "name": "soham-gadgil-portfolio",
+  "version": "1.0.0",
+  "description": "Soham Gadgil's personal academic portfolio.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "keywords": [
+    "portfolio",
+    "academic",
+    "tailwindcss"
+  ],
+  "author": "Soham Gadgil",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

@@ -37,6 +37,16 @@
     .animated-section {
       opacity: 0;
     }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     .glass-card {
       background: rgba(31, 41, 55, 0.6);
       backdrop-filter: blur(10px);
@@ -104,6 +114,16 @@
       visibility: visible;
       transform: translateX(-50%) scale(1);
     }
+
+    /* Mobile Menu Transition */
+    #mobile-menu {
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    #mobile-menu.hidden {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
@@ -113,9 +133,10 @@
 
   <!-- Floating Header -->
   <header class="sticky top-0 z-50 transition-all duration-300" id="navbar">
-    <div class="container mx-auto px-6 py-3">
+    <div class="container mx-auto px-4 sm:px-6 py-3">
         <div class="flex justify-between items-center bg-brand-secondary/50 backdrop-blur-md rounded-xl p-4 border border-white/10 shadow-lg">
             <h1 class="text-xl font-bold text-brand-heading">Soham Gadgil</h1>
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
                 <a href="#research" class="hover:text-brand-accent transition-colors">Research</a>
@@ -124,29 +145,49 @@
                 <a href="#experience" class="hover:text-brand-accent transition-colors">Experience</a>
                 <a href="#teaching" class="hover:text-brand-accent transition-colors">Teaching</a>
             </nav>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+              <button id="mobile-menu-button" class="text-brand-heading focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+              </button>
+            </div>
         </div>
     </div>
   </header>
 
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-brand-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center space-y-8">
+    <button id="mobile-menu-close-button" class="absolute top-7 right-6 text-brand-heading">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <a href="#about" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">About</a>
+    <a href="#research" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">Research</a>
+    <a href="#achievements" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">Achievements</a>
+    <a href="#publications" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">Publications</a>
+    <a href="#experience" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">Experience</a>
+    <a href="#teaching" class="mobile-menu-link text-2xl font-bold text-brand-heading hover:text-brand-accent">Teaching</a>
+  </div>
+
+
   <!-- Main Content -->
-  <main class="container mx-auto px-6 py-12">
+  <main class="container mx-auto px-4 sm:px-6 py-12">
 
     <!-- About Section -->
     <section id="about" class="min-h-[80vh] flex items-center justify-center animated-section">
-      <div class="w-full flex flex-col md:flex-row items-center gap-12">
+      <div class="w-full flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
         <div class="md:w-2/3 space-y-4 text-center md:text-left">
           <h2 class="text-4xl md:text-5xl font-bold text-brand-heading leading-tight">Soham Gadgil</h2>
-          <p class="text-lg text-brand-accent">Ph.D. Student in Computer Science & Engineering at the University of Washington</p>
+          <p class="text-lg text-brand-accent">Ph.D. Student in Computer Science & Engineering</p>
           <p>
             Hi! I am a third year CSE PhD student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank" class="text-brand-accent hover:underline">AIMS Lab</a>, advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank" class="text-brand-accent hover:underline">Dr. Su-In Lee</a>. Prior to starting my Ph.D, I spent a year as a data engineer at Microsoft in the Windows Experience team.
           </p>
           <p>
-            I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research assistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/" target="_blank" class="text-brand-accent hover:underline">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl" class="text-brand-accent hover:underline">Dr. Kilian Pohl</a>. I was also part of the AI for Healthcare (<a href="https://stanfordmlgroup.github.io/programs/aihc-bootcamp/" target="_blank" class="text-brand-accent hover:underline">AIHC</a>) bootcamp in the Stanford ML Group, advised by <a href="https://pranavrajpurkar.com/" target="_blank" class="text-brand-accent hover:underline">Dr. Pranav Rajpurkar</a> and <a href="https://www.andrewng.org/" target="_blank" class="text-brand-accent hover:underline">Dr. Andrew Ng</a>. I finished my Bachelor's at Georgia Institute of Technology, with a major in Computer Engineering and a minor in Computer Science.
+            I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research assistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/" target="_blank" class="text-brand-accent hover:underline">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl" class="text-brand-accent hover:underline">Dr. Kilian Pohl</a>.
           </p>
           <p>
-            I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank" class="text-brand-accent hover:underline">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies (especially legal thrillers).
+            I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank" class="text-brand-accent hover:underline">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies.
           </p>
-          <div class="flex justify-center md:justify-start items-center space-x-6 pt-4 text-3xl text-brand-text">
+          <div class="flex justify-center md:justify-start items-center space-x-4 sm:space-x-6 pt-4 text-3xl text-brand-text">
             <a href="mailto:sgadgil@uw.edu" class="icon-link" data-tooltip="Email"><i class="bi bi-envelope-at"></i></a>
             <a href="data/Resume_Soham_Gadgil_PhD_2025.pdf" target="_blank" class="icon-link" data-tooltip="CV"><i class="bi bi-file-pdf"></i></a>
             <a href="https://scholar.google.com/citations?user=Tg2VT2UAAAAJ&hl=en&oi=ao" target="_blank" class="icon-link" data-tooltip="Google Scholar"><i class="ai ai-google-scholar-square"></i></a>
@@ -156,42 +197,42 @@
           </div>
         </div>
         <div class="md:w-1/3 flex-shrink-0">
-          <img src="images/profile_headshot.jpeg" alt="Soham Gadgil" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-brand-secondary shadow-2xl">
+          <img src="images/profile_headshot.jpeg" alt="Soham Gadgil" class="rounded-full w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-brand-secondary shadow-2xl">
         </div>
       </div>
     </section>
     
     <!-- Section Divider -->
-    <div class="my-20 border-b border-white/10"></div>
+    <div class="my-12 md:my-20 border-b border-white/10"></div>
     
     <!-- Research Section -->
     <section id="research" class="space-y-8 animated-section scroll-mt-24">
-      <h2 class="text-3xl font-bold text-center text-brand-heading mb-8">Research</h2>
-      <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
-        <p class="text-left mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-heading">Research</h2>
+      <div class="max-w-4xl mx-auto glass-card rounded-lg p-6 sm:p-8">
+        <p class="mb-6 text-left">
           The research problems I want to work on lie at the intersection of Artificial Intelligence and Healthcare. Some of my current research interests include:
         </p>
-        <div class="space-y-6">
+        <div class="space-y-4">
           <div>
-            <h3 class="text-lg font-bold text-brand-heading mb-1">Clinical AI</h3>
-            <p class="text-sm pl-4">Using multi-modal data (images, text, etc.) with deep learning to perform diagnoses and treatment of various ailments.</p>
+            <h3 class="font-semibold text-brand-heading text-lg">Clinical AI</h3>
+            <p class="text-sm">Using multi-modal data (images, text, etc.) with deep learning to perform diagnoses and treatment of various ailments.</p>
           </div>
           <div>
-            <h3 class="text-lg font-bold text-brand-heading mb-1">Explainability</h3>
-            <p class="text-sm pl-4">Developing AI techniques to increase model interpretability in settings where features are not trivial to obtain (like Emergency Medicine), auditing AI models to make them more trustworthy by exploring causal relationships between inputs and predictions.</p>
+            <h3 class="font-semibold text-brand-heading text-lg">Explainability</h3>
+            <p class="text-sm">Developing AI techniques to increase model interpretability in settings where features are not trivial to obtain (like Emergency Medicine), auditing AI models to make them more trustworthy by exploring causal relationships between inputs and predictions.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Section Divider -->
-    <div class="my-20 border-b border-white/10"></div>
+    <div class="my-12 md:my-20 border-b border-white/10"></div>
     
     <!-- Achievements Section -->
     <section id="achievements" class="space-y-8 animated-section scroll-mt-24">
-        <h2 class="text-3xl font-bold text-center text-brand-heading">Achievements</h2>
-        <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
-            <ul class="list-disc list-outside space-y-3 pl-5">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-heading">Achievements</h2>
+        <div class="max-w-4xl mx-auto glass-card rounded-lg p-6 sm:p-8">
+            <ul class="list-disc list-outside space-y-3 pl-5 text-sm sm:text-base">
                 <li>Won the best paper runner-up award at the CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a>.</li>
                 <li>Accepted into the ORS (<a href="https://ors.ece.gatech.edu/" target="_blank" class="text-brand-accent hover:underline">Opportunity Research Scholars</a>) program for undergraduate research at Georgia Tech.</li>
                 <li>Awarded <a href="https://registrar.gatech.edu/info/faculty-honors-letters" target="_blank" class="text-brand-accent hover:underline"> Faculty Honors </a> by Georgia Tech for all semesters in my undergraduate degree.</li>
@@ -203,7 +244,7 @@
     </section>
 
     <!-- Section Divider -->
-    <div class="my-20 border-b border-white/10"></div>
+    <div class="my-12 md:my-20 border-b border-white/10"></div>
     
     <!-- Publications Section -->
     <section id="publications" class="space-y-8 animated-section scroll-mt-24">
@@ -232,13 +273,17 @@
           <div class="space-y-8">
             <!-- Publication Entry -->
             <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Transparency of medical artificial intelligence systems</h4>
+              <h4 class="text-lg font-semibold text-brand-heading">[J] Transparency of medical artificial intelligence systems</h4>
               <p class="text-sm">Chanwoo Kim*, <strong>Soham Gadgil*</strong>, Su-In Lee</p>
-              <p class="text-sm italic text-gray-400">Nature Reviews Bioengineering 2025 (Accepted in principle)</p>
+              <p class="text-sm italic text-gray-400">Nature Reviews Bioengineering 2025</p>
+              <div class="flex flex-wrap gap-x-4 text-sm font-semibold pt-1">
+                  <a href="https://www.nature.com/articles/s44222-025-00363-w" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                  <a href="https://www.washington.edu/news/2025/09/10/qa-transparency-in-medical-ai-systems-is-vital-uw-researchers-say/" target="_blank" class="text-brand-accent hover:underline">[UW News]</a>
+                </div>
             </div>
              <!-- Publication Entry -->
             <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Transformer-based Time-Series Biomarker Discovery for COPD Diagnosis</h4>
+              <h4 class="text-lg font-semibold text-brand-heading">[C] Transformer-based Time-Series Biomarker Discovery for COPD Diagnosis</h4>
               <p class="text-sm"><strong>Soham Gadgil</strong>, Joshua Galanter, Mohammadreza Negahdar</p>
               <p class="text-sm italic text-gray-400">NeurIPS 2024 <a href="https://neurips-time-series-workshop.github.io/" target="_blank" class="text-brand-accent hover:underline">TSALM Workshop</a> & <a href="https://conference.thoracic.org/" target="_blank" class="text-brand-accent hover:underline">ATS 2025</a></p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -247,7 +292,7 @@
             </div>
              <!-- Publication Entry -->
             <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Discovering mechanisms underlying medical AI prediction of protected attributes</h4>
+              <h4 class="text-lg font-semibold text-brand-heading">[C] Discovering mechanisms underlying medical AI prediction of protected attributes</h4>
               <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Alex J. DeGrave<sup>*</sup>, Roxana Daneshjou, Su-In Lee</p>
               <p class="text-sm italic text-gray-400">CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a> <strong class="text-amber-400">(Oral, Best Paper Runner-Up)</strong></p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -256,7 +301,7 @@
             </div>
              <!-- Publication Entry -->
             <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Estimating Conditional Mutual Information for Dynamic Feature Selection</h4>
+              <h4 class="text-lg font-semibold text-brand-heading">[C] Estimating Conditional Mutual Information for Dynamic Feature Selection</h4>
               <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Ian Covert<sup>*</sup>, Su-In Lee</p>
               <p class="text-sm italic text-gray-400">ICLR 2024</p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -266,7 +311,7 @@
             </div>
             <!-- Publication Entry -->
             <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Data Alignment for Zero-Shot Concept Generation in Dermatology AI</h4>
+              <h4 class="text-lg font-semibold text-brand-heading">[C] Data Alignment for Zero-Shot Concept Generation in Dermatology AI</h4>
               <p class="text-sm"><strong>Soham Gadgil</strong>, Mahtab Bigverdi</p>
               <p class="text-sm italic text-gray-400">ICLR 2024 <a href="https://sites.google.com/view/dpfm-iclr24/home" target="_blank" class="text-brand-accent hover:underline">DPFM Workshop</a></p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -275,18 +320,19 @@
             </div>
             <!-- Publication Entry -->
             <div class="space-y-1">
-                <h4 class="text-lg font-semibold text-brand-heading">Fostering transparent medical image AI via an image-text foundation model grounded in medical literature</h4>
+                <h4 class="text-lg font-semibold text-brand-heading">[J] Transparent medical image AI via an image–text foundation model grounded in medical literature</h4>
                 <p class="text-sm">Chanwoo Kim, <strong>Soham Gadgil</strong>, Alex J. DeGrave, Zhuo Ran Cai, Roxana Daneshjou, Su-In Lee</p>
                 <p class="text-sm italic text-gray-400">Nature Medicine 2024</p>
                 <div class="flex flex-wrap gap-x-4 text-sm font-semibold pt-1">
-                  <a href="https://www.medrxiv.org/content/medrxiv/early/2023/06/12/2023.06.07.23291119.full.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                  <a href="https://www.nature.com/articles/s41591-024-02887-x" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
                   <a href="https://github.com/suinleelab/MONET" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
-                  <a href="https://www.msn.com/en-gb/health/other/monet-new-ai-tool-enhances-medical-imaging-with-deep-learning-and-text-analysis/ar-AA1niGbn" target="_blank" class="text-brand-accent hover:underline">[Press]</a>
+                  <a href="https://www.news-medical.net/news/20240419/MONET-New-AI-tool-enhances-medical-imaging-with-deep-learning-and-text-analysis.aspx" target="_blank" class="text-brand-accent hover:underline">[Press]</a>
+                  <a href="https://news.cs.washington.edu/2024/09/11/monet-helps-paint-a-clearer-picture-of-medical-ai-systems/" target="_blank" class="text-brand-accent hover:underline">[UW News]</a>
                 </div>
             </div>
             <!-- Publication Entry -->
             <div class="space-y-1">
-                <h4 class="text-lg font-semibold text-brand-heading">CheXseg: Combining Expert Annotations with DNN-generated Saliency Maps for X-ray Segmentation</h4>
+                <h4 class="text-lg font-semibold text-brand-heading">[C] CheXseg: Combining Expert Annotations with DNN-generated Saliency Maps for X-ray Segmentation</h4>
                 <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Mark Endo<sup>*</sup>, Emily Wen<sup>*</sup>, Andrew Y. Ng, Pranav Rajpurkar</p>
                 <p class="text-sm italic text-gray-400">MIDL 2021</p>
                 <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -296,7 +342,7 @@
             </div>
             <!-- Publication Entry -->
             <div class="space-y-1">
-                <h4 class="text-lg font-semibold text-brand-heading">Spatio-Temporal Graph Convolution for Resting-State fMRI Analysis</h4>
+                <h4 class="text-lg font-semibold text-brand-heading">[C] Spatio-Temporal Graph Convolution for Resting-State fMRI Analysis</h4>
                 <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Qingyu Zhao<sup>*</sup>, Adolf Pfefferbaum<sup>*</sup>, Edith V. Sullivan, Ehsan Adeli, Kilian M. Pohl</p>
                 <p class="text-sm italic text-gray-400">MICCAI 2020</p>
                 <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -306,7 +352,7 @@
             </div>
             <!-- Publication Entry -->
             <div class="space-y-1">
-                <h4 class="text-lg font-semibold text-brand-heading">Solving The Lunar Lander Problem under Uncertainty using Reinforcement Learning</h4>
+                <h4 class="text-lg font-semibold text-brand-heading">[C] Solving The Lunar Lander Problem under Uncertainty using Reinforcement Learning</h4>
                 <p class="text-sm"><strong>Soham Gadgil</strong>, Yunfeng Xin, Chengzhe Xu</p>
                 <p class="text-sm italic text-gray-400">IEEE SouthEastCon 2020</p>
                 <div class="flex space-x-4 text-sm font-semibold pt-1">
@@ -316,17 +362,21 @@
             </div>
           </div>
         </div>
+        <br>
+        *: equal contribution  &nbsp;&nbsp; [J]: journal, [C]: conference
+
       </div>
     </section>
 
+
     <!-- Section Divider -->
-    <div class="my-20 border-b border-white/10"></div>
+    <div class="my-12 md:my-20 border-b border-white/10"></div>
     
     <!-- Other Experiences Section -->
     <section id="experience" class="space-y-8 animated-section scroll-mt-24">
-        <h2 class="text-3xl font-bold text-center text-brand-heading">Other Experiences</h2>
-        <div class="max-w-4xl mx-auto glass-card rounded-lg p-8">
-            <ul class="list-disc list-outside space-y-3 pl-5">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-heading">Other Experiences</h2>
+        <div class="max-w-4xl mx-auto glass-card rounded-lg p-6 sm:p-8">
+            <ul class="list-disc list-outside space-y-3 pl-5 text-sm sm:text-base">
                 <li>Reviewer: ICLR 2025, ICML 2025, NeurIPS 2024, MIDL 2022, ICLR 2024 DPFM Workshop, AISTATS 2025 Good Data Workshop</li>
                 <li>President of Georgia Tech IEEE, leading the largest IEEE student branch in the US with over 800 members.</li>
                 <li>International Liasion for the Student Alumni Association at Georgia Tech.</li>
@@ -336,79 +386,86 @@
     </section>
 
     <!-- Section Divider -->
-    <div class="my-20 border-b border-white/10"></div>
+    <div class="my-12 md:my-20 border-b border-white/10"></div>
 
     <!-- Teaching Section -->
-    <section id="teaching" class="space-y-8 animated-section scroll-mt-24">
-      <h2 class="text-3xl font-bold text-center text-brand-heading mb-8">Teaching Assistantships</h2>
-      <div class="max-w-4xl mx-auto glass-card rounded-lg p-8 space-y-8">
-        <!-- University of Washington -->
-        <div>
-          <h3 class="text-xl font-bold text-brand-heading mb-4">University of Washington</h3>
-          <div class="space-y-1 pl-4">
-            <h4 class="text-lg font-semibold text-brand-heading">Introduction to AI (<a href="https://courses.cs.washington.edu/courses/cse473/22au/" target="_blank" class="text-brand-accent hover:underline">CSE 473</a>)</h4>
-            <p class="text-sm">The course covers principal ideas and developments in artificial intelligence: Problem solving and search, game playing, knowledge representation and reasoning, uncertainty, machine learning, natural language processing. I held weekly office hours and assisted in preparing/grading the homework assignments.</p>
-          </div>
+    <section id="teaching" class="space-y-12 animated-section scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-heading">Teaching Assistantships</h2>
+        <div class="max-w-4xl mx-auto glass-card rounded-lg p-6 sm:p-8 space-y-8">
+            <!-- University of Washington -->
+            <div>
+              <h3 class="text-xl font-semibold text-brand-heading mb-4 border-b border-white/10 pb-2">University of Washington</h3>
+              <div class="space-y-1 pl-2 text-sm sm:text-base">
+                  <h4 class="font-bold text-brand-heading">Introduction to AI (<a href="https://courses.cs.washington.edu/courses/cse473/22au/" target="_blank" class="text-brand-accent hover:underline">CSE 473</a>)</h4>
+                  <p>The course covers principal ideas and developments in artificial intelligence: Problem solving and search, game playing, knowledge representation and reasoning, uncertainty, machine learning, natural language processing. I held weekly office hours and assisted in preparing/grading the homework assignments.</p>
+              </div>
+            </div>
+
+            <!-- Stanford -->
+            <div>
+              <h3 class="text-xl font-semibold text-brand-heading mb-4 border-b border-white/10 pb-2">Stanford</h3>
+              <div class="space-y-4">
+                <div class="space-y-1 pl-2 text-sm sm:text-base">
+                    <h4 class="font-bold text-brand-heading">Computer Organization and Systems (<a href="http://web.stanford.edu/class/cs107/" target="_blank" class="text-brand-accent hover:underline">CS 107</a>)</h4>
+                    <p>TA for CS 107, one of the largest introductory undergraduate courses at Stanford. I led lab sessions, held office hours, and assisted in grading and designing exams.</p>
+                </div>
+                 <div class="space-y-1 pl-2 text-sm sm:text-base">
+                    <h4 class="font-bold text-brand-heading">Trustworthy Machine Learning (<a href="https://web.stanford.edu/class/cs329t/" target="_blank" class="text-brand-accent hover:underline">CS 329T</a>)</h4>
+                    <p>TA for the first course offering of CS 329T. I co-developed and led the lab sections. I also helped the instructors design lecture slides, homework assignments, and the final project.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Georgia Tech -->
+            <div>
+              <h3 class="text-xl font-semibold text-brand-heading mb-4 border-b border-white/10 pb-2">Georgia Tech</h3>
+               <div class="space-y-4">
+                <div class="space-y-1 pl-2 text-sm sm:text-base">
+                    <h4 class="font-bold text-brand-heading">Linear Algebra (<a href="https://math.gatech.edu/courses/math/1554" target="_blank" class="text-brand-accent hover:underline">MATH 1554</a>)</h4>
+                    <p>As a TA for linear algebra, I led two 50 minute recitation sessions each week.</p>
+                </div>
+                 <div class="space-y-1 pl-2 text-sm sm:text-base">
+                    <h4 class="font-bold text-brand-heading">Computer Architecture (<a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f18/" target="_blank" class="text-brand-accent hover:underline">CS 3056</a>)</h4>
+                    <p>Guided over 60 students with homeworks and projects in computer architecture. Held weekly office hours, exam review sessions, and collaborated with the instructor for grading and project ideation.</p>
+                </div>
+              </div>
+            </div>
         </div>
-        <!-- Stanford -->
-        <div>
-          <h3 class="text-xl font-bold text-brand-heading mb-4">Stanford</h3>
-          <div class="space-y-6 pl-4">
-            <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Computer Organization and Systems (<a href="http://web.stanford.edu/class/cs107/" target="_blank" class="text-brand-accent hover:underline">CS 107</a>)</h4>
-              <p class="text-sm">TA for CS 107, one of the largest introductory undergraduate courses at Stanford. I led lab sessions, held office hours, and assisted in grading and designing exams. Topics included C programming, data representation, machine-level code, computer arithmetic, compilation, performance optimization, and memory management.</p>
-            </div>
-            <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Trustworthy Machine Learning (<a href="https://web.stanford.edu/class/cs329t/" target="_blank" class="text-brand-accent hover:underline">CS 329T</a>)</h4>
-              <p class="text-sm">TA for the first course offering of CS 329T. I co-developed and led the lab sections. I also helped the instructors design lecture slides, homework assignments, and the final project.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Georgia Tech -->
-        <div>
-          <h3 class="text-xl font-bold text-brand-heading mb-4">Georgia Tech</h3>
-          <div class="space-y-6 pl-4">
-            <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Linear Algebra (<a href="https://math.gatech.edu/courses/math/1554" target="_blank" class="text-brand-accent hover:underline">MATH 1554</a>)</h4>
-              <p class="text-sm">As a TA for linear algebra, I led two 50 minute recitation sessions each week. Concepts ranged from eigenvalues, eigenvectors, applications to linear systems, least squares, diagonalization, quadratic forms.</p>
-            </div>
-            <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">Computer Architecture (<a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f18/" target="_blank" class="text-brand-accent hover:underline">CS 3056</a>)</h4>
-              <p class="text-sm">Guided over 60 students with homeworks and projects in computer architecture. Held weekly office hours, exam review sessions, and collaborated with the instructor for grading and project ideation. Topics included the basic organizational principles of the processor core, memory hierarchy, and the I/O subsystem.</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
     
   </main>
   
   <!-- Footer -->
-  <footer class="text-center py-8 mt-16 border-t border-white/10">
-      <p class="text-xs text-gray-500">
+  <footer class="text-center py-8 mt-12 md:mt-16 border-t border-white/10">
+      <p class="text-xs text-gray-500 px-4">
           Designed with Tailwind CSS
       </p>
   </footer>
 
   <script>
-    // Simple Intersection Observer for fade-in animations
     document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll('.animated-section');
+        // --- Mobile Menu Logic ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const closeButton = document.getElementById('mobile-menu-close-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuLinks = document.querySelectorAll('.mobile-menu-link');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+        const openMenu = () => mobileMenu.classList.remove('hidden');
+        const closeMenu = () => mobileMenu.classList.add('hidden');
 
-        sections.forEach(section => {
-            observer.observe(section);
+        menuButton.addEventListener('click', openMenu);
+        closeButton.addEventListener('click', closeMenu);
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
 
-        // Sticky header background change on scroll
+        // --- Apply fade-in animation to all sections on load ---
+        const sections = document.querySelectorAll('.animated-section');
+        sections.forEach(section => {
+            section.style.animation = 'fadeInUp 0.8s ease-out forwards';
+        });
+
+        // --- Sticky header background change on scroll ---
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -420,11 +477,15 @@
             }
         });
 
-        // Immersive particle background
+        // --- Immersive particle background ---
         const canvas = document.getElementById('immersive-background');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        let animationFrameId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
 
         let particlesArray;
 
@@ -444,12 +505,8 @@
                 ctx.fill();
             }
             update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                 this.x += this.directionX;
                 this.y += this.directionY;
                 this.draw();
@@ -490,27 +547,26 @@
         }
 
         function animate() {
-            requestAnimationFrame(animate);
             ctx.clearRect(0, 0, innerWidth, innerHeight);
-
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
             }
             connect();
+            animationFrameId = requestAnimationFrame(animate);
         }
-        
+
         window.addEventListener('resize', () => {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
+            cancelAnimationFrame(animationFrameId);
+            resizeCanvas();
             init();
+            animate();
         });
 
+        resizeCanvas();
         init();
         animate();
     });
   </script>
-
 </body>
 </html>
-
 

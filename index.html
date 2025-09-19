@@ -210,16 +210,32 @@
       <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-heading">Research</h2>
       <div class="max-w-4xl mx-auto glass-card rounded-lg p-6 sm:p-8">
         <p class="mb-6 text-left">
-          The research problems I want to work on lie at the intersection of Artificial Intelligence and Healthcare. Some of my current research interests include:
+          The research problems I work on lie at the intersection of Explainable AI and Healthcare:
         </p>
         <div class="space-y-4">
           <div>
-            <h3 class="font-semibold text-brand-heading text-lg">Clinical AI</h3>
-            <p class="text-sm">Using multi-modal data (images, text, etc.) with deep learning to perform diagnoses and treatment of various ailments.</p>
+            <h3 class="font-semibold text-brand-heading text-lg">Transparency in medical AI</h3>
+            <ul class="list-disc list-outside pl-5 text-sm">
+              <li>Developed a vision-language foundation model to improve transparency in the medical AI workflow <a href="https://arxiv.org/abs/2505.16077" target="_blank" class="text-brand-accent hover:underline">[Nature Medicine 2024]</a></li>
+              <li>Guidelines for building medical AI systems that are transparent and interpretable <a href="https://www.nature.com/articles/s44222-025-00363-w" target="_blank" class="text-brand-accent hover:underline">[Nature Reviews Bioengineering 2025]</a></li>
+            </ul>
           </div>
           <div>
-            <h3 class="font-semibold text-brand-heading text-lg">Explainability</h3>
-            <p class="text-sm">Developing AI techniques to increase model interpretability in settings where features are not trivial to obtain (like Emergency Medicine), auditing AI models to make them more trustworthy by exploring causal relationships between inputs and predictions.</p>
+            <h3 class="font-semibold text-brand-heading text-lg">Explainable AI</h3>
+            <ul class="list-disc list-outside pl-5 text-sm">
+              <li>Developing efficient representation learning methods using sparse autoencoders to interpret the complex behavior of LLMs <a href="https://arxiv.org/pdf/2505.16077" target="_blank" class="text-brand-accent hover:underline">[Preprint 2025]</a></li>
+              <li>Developed a probabilistic model for feature selection on a per-sample basis in low-resource settings <a href="https://arxiv.org/abs/2306.03301" target="_blank" class="text-brand-accent hover:underline">[ICLR 2024]</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-brand-heading text-lg">AI in Healthcare</h3>
+            <ul class="list-disc list-outside pl-5 text-sm">
+              <li>Developing unsupervised concept discovery methods for medical AI systems using sparse-autoencoders and LLMs tuned with post-training techniques</li>
+              <li>Exploring techniques to fine-tune conditional diffusion models in a low-data regime for steering specific concepts</li>
+              <li>Used counterfactual generative models to analyse AI-specific signals enabling classifiers to detect demographic attributes from medical images with high performance <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v2" target="_blank" class="text-brand-accent hover:underline">[Preprint 2025]</a>&nbsp;<a href="https://drive.google.com/file/d/1T1_d9p2JZrOC4HgPKWybkcoB5LVqMYoF/view" target="_blank" class="text-brand-accent hover:underline">[CVPR 2024 DCAMI Workshop]</a></li>
+              <li>Developed a semi-supervised segmentation model for multi-pathology segmentation by combining expert annotations with pseudo-labels <a href="https://arxiv.org/abs/2102.10484" target="_blank" class="text-brand-accent hover:underline">[MIDL 2021]</a></li>
+              <li>Formulated a spatio-temporal graph convolution network model for predicting age and sex from MRI scans <a href="https://arxiv.org/pdf/2003.10613" target="_blank" class="text-brand-accent hover:underline">[MICCAI 2020]</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -258,9 +274,19 @@
             <div class="space-y-1">
               <h4 class="text-lg font-semibold text-brand-heading">Ensembling Sparse Autoencoders</h4>
               <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Chris Lin<sup>*</sup>, Su-In Lee</p>
-              <p class="text-sm italic text-gray-400">Preprint (Under Review)</p>
+              <p class="text-sm italic text-gray-400">Under Review</p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
                 <a href="https://arxiv.org/abs/2505.16077" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">DREAM: A framework for discovering mechanisms underlying AI prediction of protected attributes</h4>
+              <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Alex J. DeGrave<sup>*</sup>, Joseph D. Janizek, Sonnet Xu, Lotanna Nwandu, Fonette Fonjungo, Su-In Lee&#8224, Roxana Daneshjou&#8224</p>
+              <p class="text-sm italic text-gray-400">Under Review at Nature Communications</p>
+              <p class="text-sm italic text-gray-400">Earlier version presented at CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a> <strong class="text-amber-400">(Oral, Best Paper Runner-Up)</strong></p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v2.full.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                <a href="https://github.com/suinleelab/protected-attrib-prediction" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
               </div>
             </div>
           </div>
@@ -288,15 +314,6 @@
               <p class="text-sm italic text-gray-400">NeurIPS 2024 <a href="https://neurips-time-series-workshop.github.io/" target="_blank" class="text-brand-accent hover:underline">TSALM Workshop</a> & <a href="https://conference.thoracic.org/" target="_blank" class="text-brand-accent hover:underline">ATS 2025</a></p>
               <div class="flex space-x-4 text-sm font-semibold pt-1">
                 <a href="https://arxiv.org/abs/2411.09027" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
-              </div>
-            </div>
-             <!-- Publication Entry -->
-            <div class="space-y-1">
-              <h4 class="text-lg font-semibold text-brand-heading">[C] Discovering mechanisms underlying medical AI prediction of protected attributes</h4>
-              <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Alex J. DeGrave<sup>*</sup>, Roxana Daneshjou, Su-In Lee</p>
-              <p class="text-sm italic text-gray-400">CVPR 2024 <a href="https://dca-in-mi.github.io/" target="_blank" class="text-brand-accent hover:underline">DCAMI Workshop</a> <strong class="text-amber-400">(Oral, Best Paper Runner-Up)</strong></p>
-              <div class="flex space-x-4 text-sm font-semibold pt-1">
-                <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v1.full.pdf" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
               </div>
             </div>
              <!-- Publication Entry -->
@@ -363,7 +380,7 @@
           </div>
         </div>
         <br>
-        *: equal contribution  &nbsp;&nbsp; [J]: journal, [C]: conference
+        *: equal contribution  &#8224: Corresponding Author &nbsp;&nbsp; [J]: journal, [C]: conference
 
       </div>
     </section>

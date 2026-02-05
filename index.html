@@ -124,12 +124,43 @@
       transform: translateY(-100%);
       pointer-events: none;
     }
+
+    /* Scroll Progress Bar */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      z-index: 60; /* above header (header uses z-50) */
+      pointer-events: none; /* allow clicks through */
+      background: transparent;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #06b6d4 0%, #3b82f6 100%);
+      box-shadow: 0 0 10px rgba(59,130,246,0.25);
+      border-radius: 0 0 6px 6px;
+      transition: width 160ms linear;
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      #progress-bar { transition: none; }
+    }
   </style>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
   
   <!-- Immersive Background Canvas -->
   <canvas id="immersive-background"></canvas>
+
+  <!-- Scroll Progress Bar -->
+  <div id="progress-container" aria-hidden="false">
+    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
 
   <!-- Floating Header -->
   <header class="sticky top-0 z-50 transition-all duration-300" id="navbar">
@@ -179,10 +210,10 @@
           <h2 class="text-4xl md:text-5xl font-bold text-brand-heading leading-tight">Soham Gadgil</h2>
           <p class="text-lg text-brand-accent">Ph.D. Student in Computer Science & Engineering</p>
           <p>
-            Hi! I am a third year CSE PhD student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank" class="text-brand-accent hover:underline">AIMS Lab</a>, advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank" class="text-brand-accent hover:underline">Dr. Su-In Lee</a>. Prior to starting my Ph.D, I spent a year as a data engineer at Microsoft in the Windows Experience team.
+            Hi! I am a fourth year CSE Ph.D. student at University of Washington in the <a href="https://aims.cs.washington.edu/home" target="_blank" class="text-brand-accent hover:underline">AIMS Lab</a>, advised by <a href="https://www.linkedin.com/in/su-in-lee-b9855073/" target="_blank" class="text-brand-accent hover:underline">Dr. Su-In Lee</a>. Prior to starting my Ph.D., I spent a year as a data engineer at Microsoft in the Windows Experience team.
           </p>
           <p>
-            I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research assistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/" target="_blank" class="text-brand-accent hover:underline">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl" class="text-brand-accent hover:underline">Dr. Kilian Pohl</a>.
+            I completed my Masters from Stanford in Computer Science with a depth in AI, where I was a research assistant in the Computational Neuroimage Science Lab (<a href="https://cnslab.stanford.edu/" target="_blank" class="text-brand-accent hover:underline">CNS<sup>LAB</sup></a>), advised by <a href="https://cnslab.stanford.edu/personal/kilian-pohl" class="text-brand-accent hover:underline">Dr. Kilian Pohl</a>. I was also part of the <a href="https://aimi.stanford.edu/research/ai-healthcare-bootcamp" target="_blank" class="text-brand-accent hover:underline">AI for Healthcare (AIHC) Bootcamp</a> in the <a href="https://stanfordmlgroup.github.io/", target="_blank">Stanford Machine Learning Group</a>, advised by <a href="https://pranavrajpurkar.com/" target="_blank" class="text-brand-accent hover:underline">Dr. Pranav Rajpurkar</a> and <a href="https://en.wikipedia.org/wiki/Andrew_Ng" target="_blank" class="text-brand-accent hover:underline">Dr. Andrew Ng</a>.
           </p>
           <p>
             I am also a part-time instructor at <a href="https://persolv.ai/" target="_blank" class="text-brand-accent hover:underline">Persolv</a>, teaching AI fundamentals to high school students. In my spare time, I like playing tennis, hiking, exploring different cuisines, and watching movies.
@@ -231,7 +262,6 @@
             <h3 class="font-semibold text-brand-heading text-lg">AI in Healthcare</h3>
             <ul class="list-disc list-outside pl-5 text-sm">
               <li>Developing unsupervised concept discovery methods for medical AI systems using sparse-autoencoders and LLMs tuned with post-training techniques</li>
-              <li>Exploring techniques to fine-tune conditional diffusion models in a low-data regime for steering specific concepts</li>
               <li>Used counterfactual generative models to analyse AI-specific signals enabling classifiers to detect demographic attributes from medical images with high performance <a href="https://www.medrxiv.org/content/10.1101/2024.04.09.24305289v2" target="_blank" class="text-brand-accent hover:underline">[Preprint 2025]</a>&nbsp;<a href="https://drive.google.com/file/d/1T1_d9p2JZrOC4HgPKWybkcoB5LVqMYoF/view" target="_blank" class="text-brand-accent hover:underline">[CVPR 2024 DCAMI Workshop]</a></li>
               <li>Developed a semi-supervised segmentation model for multi-pathology segmentation by combining expert annotations with pseudo-labels <a href="https://arxiv.org/abs/2102.10484" target="_blank" class="text-brand-accent hover:underline">[MIDL 2021]</a></li>
               <li>Formulated a spatio-temporal graph convolution network model for predicting age and sex from MRI scans <a href="https://arxiv.org/pdf/2003.10613" target="_blank" class="text-brand-accent hover:underline">[MICCAI 2020]</a></li>
@@ -280,6 +310,15 @@
               </div>
             </div>
             <div class="space-y-1">
+              <h4 class="text-lg font-semibold text-brand-heading">SurrogateSHAP: Training-Free Contributor Attribution for Text-to-Image (T2I) Models</h4>
+              <p class="text-sm">Mingyu Lu, <strong>Soham Gadgil</strong>, Chris Lin, Chanwoo Kim, Su-In Lee</p>
+              <p class="text-sm italic text-gray-400">Under Review</p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/pdf/2409.03080" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                <a href="https://github.com/kaczmarj/HIPPO" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+              </div>
+            </div>
+            <div class="space-y-1">
               <h4 class="text-lg font-semibold text-brand-heading">DREAM: A framework for discovering mechanisms underlying AI prediction of protected attributes</h4>
               <p class="text-sm"><strong>Soham Gadgil<sup>*</sup></strong>, Alex J. DeGrave, Joseph D. Janizek, Sonnet Xu, Lotanna Nwandu, Fonette Fonjungo, Su-In Lee&#8224, Roxana Daneshjou&#8224</p>
               <!-- <p class="text-sm italic text-gray-400">Under Review at Nature Communications</p> -->
@@ -293,6 +332,10 @@
               <h4 class="text-lg font-semibold text-brand-heading">Explainable AI for computational pathology identifies model limitations and tissue biomarkers</h4>
               <p class="text-sm">Jakub R. Kaczmarzyk<sup>*</sup>, Chanwoo Kim<sup>*</sup>, <strong>Soham Gadgil<sup>*</sup></strong>, Deepika Savant, Zhen Zhao, Joel H. Saltz, Su-In Lee&#8224, Peter K. Koo&#8224</p>
               <p class="text-sm italic text-gray-400">Under Review at Nature BME</p>
+              <div class="flex space-x-4 text-sm font-semibold pt-1">
+                <a href="https://arxiv.org/pdf/2409.03080" target="_blank" class="text-brand-accent hover:underline">[Paper]</a>
+                <a href="https://github.com/kaczmarj/HIPPO" target="_blank" class="text-brand-accent hover:underline">[Code]</a>
+              </div>
             </div>
           </div>
         </div>
@@ -589,6 +632,40 @@
         animate();
     });
   </script>
+  <script>
+    // Scroll progress bar updater
+    (function () {
+      function safeGet(id) { return document.getElementById(id); }
+      const progressBar = safeGet('progress-bar');
+      if (!progressBar) return;
+
+      let ticking = false;
+
+      function updateProgress() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const docHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+        const winHeight = window.innerHeight || document.documentElement.clientHeight;
+        const scrollable = Math.max(0, docHeight - winHeight);
+        const percent = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
+        const pct = Math.min(100, Math.max(0, percent));
+        progressBar.style.width = pct + '%';
+        progressBar.setAttribute('aria-valuenow', Math.round(pct));
+        ticking = false;
+      }
+
+      function requestUpdate() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', requestUpdate, { passive: true });
+      window.addEventListener('resize', requestUpdate);
+
+      // initialize
+      requestUpdate();
+    })();
+  </script>
 </body>
 </html>
-
